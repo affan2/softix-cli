@@ -42,3 +42,6 @@ def create_customer(context, data):
 def delete_customer(context):
     """Delete a customer."""
     pass
+
+if __name__ == "__main__":
+    cli()
