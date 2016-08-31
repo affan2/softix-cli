@@ -1,5 +1,10 @@
 # Softix CLI
 
+All commands require account information: client-id, secret, and seller-code. The CLI can use environment variables (my recommendation).
+ - SOFTIX_CLIENT_ID
+ - SOFTIX_SECRET
+ - SOFTIX_SELLER_CODE
+
 ## Creating new customer
 
 ```bash
