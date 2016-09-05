@@ -43,5 +43,25 @@ def delete_customer(context):
     """Delete a customer."""
     pass
 
+@cli.command(name='get-performance-availabilities')
+@click.argument('performance-code', type=str)
+@click.pass_context
+def get_performance_availabilities(context, performance_code):
+    """
+    Get performance availabilities.
+
+    Performance availabilities is basically event information
+    """
+    softix_client = softix.SoftixCore()
+    softix_client.authenticate(context.obj['client_id'], context.obj['secret'])
+    seller_code = context.obj['seller_code']
+    try:
+        performance_data = softix_client.performance_availabilities(seller_code, performance_code)
+        output = json.dumps(performance_data)
+        click.echo(output)
+    except softix.exceptions.SoftixError as error:
+        click.echo(error.message)
+        context.exit(1)
+
 if __name__ == "__main__":
     cli()
