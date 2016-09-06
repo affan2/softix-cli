@@ -63,5 +63,23 @@ def get_performance_availabilities(context, performance_code):
         click.echo(error.message)
         context.exit(1)
 
+@cli.command(name='get-performance-prices')
+@click.argument('performance-code', type=str)
+@click.pass_context
+def get_performance_prices(context, performance_code):
+    """
+    Get performance prices.
+    """
+    softix_client = softix.SoftixCore()
+    softix_client.authenticate(context.obj['client_id'], context.obj['secret'])
+    seller_code = context.obj['seller_code']
+    try:
+        performance_prices = softix_client.performance_prices(seller_code, performance_code)
+        output = json.dumps(performance_prices)
+        click.echo(output)
+    except softix.exceptions.SoftixError as error:
+        click.echo(error.message)
+        context.exit(1)
+
 if __name__ == "__main__":
     cli()
