@@ -273,3 +273,171 @@ $softix get-performance-prices ETES0000004EL
     }
 }
 ```
+
+## Create a basket
+What we call a cart, the Dubai API calls a basket.
+
+```
+$ softix create-basket ETES0000004EL --section SGA --demand Q 1 3 --fee 5 W
+
+{
+    "Fees": [],
+    "Id": "19115-32902968",
+    "Offers": [
+        {
+            "Channel": "W",
+            "DateTime": "0001-01-01T00:00:00",
+            "Demand": [
+                {
+                    "Admits": 3,
+                    "Customer": {
+                        "AFile": null,
+                        "Account": null,
+                        "Id": null,
+                        "OrgCustomerId": null
+                    },
+                    "Entitlement": null,
+                    "OfferCode": null,
+                    "PriceType": null,
+                    "PriceTypeCode": "Q",
+                    "PriceTypeId": null,
+                    "Prices": [
+                        {
+                            "Fees": [
+                                {
+                                    "Bucket": null,
+                                    "Code": null,
+                                    "FinanceCode": null,
+                                    "Id": null,
+                                    "Inside": false,
+                                    "Name": null,
+                                    "SheetId": 0,
+                                    "Total": 0,
+                                    "Type": "1",
+                                    "TypeName": "BookingFee"
+                                }
+                            ],
+                            "Id": null,
+                            "Net": 30000,
+                            "SheetId": 0
+                        }
+                    ],
+                    "QualifierCode": null,
+                    "Quantity": 1
+                }
+            ],
+            "Fees": [
+                {
+                    "Bucket": null,
+                    "Code": "W",
+                    "FinanceCode": null,
+                    "Id": null,
+                    "Inside": false,
+                    "Name": null,
+                    "SheetId": 0,
+                    "Total": 0,
+                    "Type": "5",
+                    "TypeName": "HandlingFee"
+                }
+            ],
+            "Id": "1",
+            "InventorySource": null,
+            "PerformanceCode": "ETES0000004EL",
+            "PriceCategory": null,
+            "PriceCategoryCode": "1",
+            "PriceCategoryId": null,
+            "Seats": [
+                {
+                    "Row": "GA",
+                    "RzStr": "RGA/Q11-13",
+                    "Seats": "11-13",
+                    "Section": "SGA"
+                }
+            ],
+            "Seller": "ANMFZ1"
+        }
+    ]
+}
+```
+
+## Get basket
+$ softix get-basket 19115-32902968
+```
+{
+    "Expiry": null,
+    "Fees": null,
+    "Id": "19115-32902968",
+    "Offers": [
+        {
+            "Channel": null,
+            "DateTime": "0001-01-01T00:00:00",
+            "Demand": [
+                {
+                    "Admits": 3,
+                    "Customer": null,
+                    "Entitlement": null,
+                    "OfferCode": null,
+                    "PriceType": null,
+                    "PriceTypeCode": "Q",
+                    "PriceTypeId": null,
+                    "Prices": [
+                        {
+                            "Fees": [
+                                {
+                                    "Bucket": null,
+                                    "Code": null,
+                                    "FinanceCode": null,
+                                    "Id": null,
+                                    "Inside": false,
+                                    "Name": null,
+                                    "SheetId": 0,
+                                    "Total": 0,
+                                    "Type": "1",
+                                    "TypeName": "BookingFee"
+                                }
+                            ],
+                            "Id": null,
+                            "Net": 30000,
+                            "SheetId": 0
+                        }
+                    ],
+                    "QualifierCode": null,
+                    "Quantity": 3
+                }
+            ],
+            "Fees": [
+                {
+                    "Bucket": null,
+                    "Code": "W",
+                    "FinanceCode": null,
+                    "Id": null,
+                    "Inside": false,
+                    "Name": null,
+                    "SheetId": 0,
+                    "Total": 0,
+                    "Type": "5",
+                    "TypeName": "Handling Fee"
+                }
+            ],
+            "Id": "1",
+            "InventorySource": {
+                "Id": "19115:32902968",
+                "Name": "Origin"
+            },
+            "PerformanceCode": "ETES0000004EL",
+            "PriceCategory": null,
+            "PriceCategoryCode": "1",
+            "PriceCategoryId": "1",
+            "Seats": [
+                {
+                    "Row": "GA",
+                    "RzStr": "RGA/Q11-13",
+                    "Seats": "-",
+                    "Section": "SGA"
+                }
+            ],
+            "Seller": null
+        }
+    ]
+}
+```
