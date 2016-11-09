@@ -6,7 +6,7 @@ setup(
     name='softixcli',
     description='Python CLI for Softix',
     author='matt@itsmemattchung.com',
-    version='0.0.4',
+    version='0.0.5',
     install_requires=requirements,
     dependency_links = dependencies,
     entry_points={
