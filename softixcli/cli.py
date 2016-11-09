@@ -32,7 +32,7 @@ def cli(context, client_id, secret, seller_code):
 
 @cli.command(name='create-customer')
 @click.option("--data", "-d", help="Customer data as json", required=True)
-@click.option('--token-file', 'token', help='Token file', required=True, type=click.File('rb+'), callback=validate_token_file)
+@click.option('--token-file', 'token', help='Token file', required=True, type=click.File('rb'), callback=validate_token_file)
 @click.pass_context
 def create_customer(context, data, token):
     """
@@ -56,7 +56,7 @@ def create_customer(context, data, token):
 @click.option('--section', type=str, required=True)
 @click.option('--demand', nargs=3, required=True, multiple=True, help='Price Type Code, Quantity, Admits')
 @click.option('--fee', required=True, nargs=2, multiple=True, help='Fee: type, code', callback=validate_fee)
-@click.option('--token-file', 'token', help='Token file', required=True, type=click.File('rb+'), callback=validate_token_file)
+@click.option('--token-file', 'token', help='Token file', required=True, type=click.File('rb'), callback=validate_token_file)
 @click.pass_context
 def create_basket(context, performance_code, section, demand, fee, token):
     """
@@ -98,7 +98,7 @@ def delete_customer(context):
 
 @cli.command(name='get-performance-availabilities')
 @click.argument('performance-code', type=str)
-@click.option('--token-file', 'token', help='Token file', required=True, type=click.File('rb+'), callback=validate_token_file)
+@click.option('--token-file', 'token', help='Token file', required=True, type=click.File('rb'), callback=validate_token_file)
 @click.pass_context
 def get_performance_availabilities(context, performance_code, token):
     """
@@ -118,7 +118,7 @@ def get_performance_availabilities(context, performance_code, token):
 
 @cli.command(name='get-performance-prices')
 @click.argument('performance-code', type=str)
-@click.option('--token-file', 'token', help='Token file', required=True, type=click.File('rb+'), callback=validate_token_file)
+@click.option('--token-file', 'token', help='Token file', required=True, type=click.File('rb'), callback=validate_token_file)
 @click.pass_context
 def get_performance_prices(context, performance_code, token):
     """
@@ -136,7 +136,7 @@ def get_performance_prices(context, performance_code, token):
 
 @cli.command(name='get-basket')
 @click.argument('basket-id', type=str)
-@click.option('--token-file', 'token', help='Token file', required=True, type=click.File('rb+'), callback=validate_token_file)
+@click.option('--token-file', 'token', help='Token file', required=True, type=click.File('rb'), callback=validate_token_file)
 @click.pass_context
 def get_basket(context, basket_id, token):
     """
