@@ -139,7 +139,6 @@ def get_performance_prices(context, performance_code, token):
 @click.option('--token-json', 'token', help='Token JSON', required=True, callback=validate_token_file)
 @click.pass_context
 def get_basket(context, basket_id, token):
-o
     """
     Get basket.
     """
