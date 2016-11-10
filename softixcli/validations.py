@@ -18,7 +18,7 @@ def validate_token_file(context, param, value):
     if not value:
         return softix_client.authenticate(context.obj['client_id'], context.obj['secret'])
     try:
-        auth_data = json.load(value)
+        auth_data = json.loads(value)
         expiration_date = datetime.datetime.strptime(auth_data['expiration_date'], '%Y-%m-%dT%H:%M:%S.%f')
         expired = datetime.datetime.utcnow() > expiration_date
 
