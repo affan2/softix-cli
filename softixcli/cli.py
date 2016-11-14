@@ -152,6 +152,24 @@ def get_basket(context, basket_id, token):
         click.echo(error.message)
         context.exit(1)
 
+@cli.command(name='get-order')
+@click.argument('order-id', type=str)
+@click.option('--token-json', 'token', help='Token JSON', required=True, callback=validate_token_file)
+@click.pass_context
+def get_basket(context, order_id, token):
+    """
+    View order details.
+    """
+    softix_client = context.obj['softix_client']
+    seller_code = context.obj['seller_code']
+    try:
+        order = softix_client.order(seller_code, order_id)
+        output = json.dumps(order)
+        click.echo(output)
+    except softix.exceptions.SoftixError as error:
+        click.echo(error.message)
+        context.exit(1)
+
 
 @cli.command(name='purchase-basket')
 @click.argument('basket-id', type=str)
