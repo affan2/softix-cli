@@ -441,3 +441,10 @@ $ softix get-basket 19115-32902968
     ]
 }
 ```
+
+## Purchase basket
+```
+softix purchase-basket 1853-34501566
+```
+
+So, I've been fiddling around with the purchase-basket endpoint; according to their documentation, a number of parameters are required: customer data, payment.  I find this redundant, though.  Do we really care which of the customers purchased the basket, as long as it is paid for?  Suprisingly, this isn't needed. So, for now, there's no need to supply customer information during purchase basket call.

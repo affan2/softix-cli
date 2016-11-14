@@ -42,8 +42,8 @@ def create_customer(context, data, token):
     seller_code = context.obj['seller_code']
     try:
         customer_data = json.loads(data)
-        customer_id = softix_client.create_customer(seller_code, **customer_data)
-        output = json.dumps({'id': customer_id})
+        customer = softix_client.create_customer(seller_code, **customer_data)
+        output = json.dumps(customer)
         click.echo(output)
     except ValueError:
         click.echo("Unable to parse customer data as JSON")
@@ -151,5 +151,28 @@ def get_basket(context, basket_id, token):
     except softix.exceptions.SoftixError as error:
         click.echo(error.message)
         context.exit(1)
+
+
+@cli.command(name='purchase-basket')
+@click.argument('basket-id', type=str)
+@click.option('--token-json', 'token', help='Token JSON', required=True, callback=validate_token_file)
+@click.pass_context
+def purchase_basket(context, basket_id, token):
+    """
+    Purchase basket.
+
+    Returns the order
+    """
+    softix_client = context.obj['softix_client']
+    seller_code = context.obj['seller_code']
+    try:
+        basket = softix_client.purchase_basket(seller_code, basket_id)
+        output = json.dumps(basket)
+        click.echo(output)
+    except softix.exceptions.SoftixError as error:
+        click.echo(error.message)
+        context.exit(1)
+
+
 if __name__ == "__main__":
     cli()
