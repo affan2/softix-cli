@@ -51,6 +51,26 @@ def create_customer(context, data, token):
     except softix.exceptions.SoftixError as error:
         context.fail(error.message)
 
+@cli.command(name='add-offer')
+@click.argument('basket-id', type=str)
+@click.argument('performance-code', type=str)
+@click.option('--section', type=str, required=True)
+@click.option('--demand', nargs=3, required=True, multiple=True, help='Price Type Code, Quantity, Admits')
+@click.option('--fee', required=True, nargs=2, multiple=True, help='Fee: type, code', callback=validate_fee)
+@click.option('--token-json', 'token', help='Token JSON', required=True, callback=validate_token_file)
+@click.pass_context
+def add_offer(context, basket_id, performance_code, section, demand, fee, token):
+    """
+    Add an offer to an existing basket.
+    """
+    softix_client = context.obj['softix_client']
+    seller_code = context.obj['seller_code']
+    demands = [softix.Demand(*d) for d in demand]
+    fees = [softix.Fee(*f) for f in fee]
+    basket = softix_client.add_offer(seller_code, basket_id, performance_code, section, demands, fees)
+    click.echo(json.dumps(basket))
+
+
 @cli.command(name='create-basket')
 @click.argument('performance-code', type=str)
 @click.option('--section', type=str, required=True)
