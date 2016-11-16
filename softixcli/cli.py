@@ -212,5 +212,23 @@ def purchase_basket(context, basket_id, token):
         context.exit(1)
 
 
+@cli.command(name='reverse-order')
+@click.argument('order-id', type=str)
+@click.option('--token-json', 'token', help='Token JSON', required=True, callback=validate_token_file)
+@click.pass_context
+def reverse_order(context, order_id, token):
+    """
+    Reverse the order
+    """
+    softix_client = context.obj['softix_client']
+    seller_code = context.obj['seller_code']
+    try:
+        refund = softix_client.reverse_order(seller_code, order_id)
+        click.echo(refund)
+    except softix.exceptions.SoftixError as error:
+        click.echo(error.message)
+        context.exit(1)
+
+
 if __name__ == "__main__":
     cli()
